@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="project5style.css">
+    <title>Project5</title>
+</head>
+<body>
+    <style>
+        body{
+            background-color: aquamarine;
+        }
+    </style>
+   <div class="header">
+     <h1 style="color: darkblue; text-align: center; ">Personal Expense Tracker</h1>
+   </div>
+    
+    <div class="Table" style="text-align: center; padding-top: 20px;">
+        <label for="name">Name of Expense: </label>
+        <input type="text" id="name">
+        
+        <label for="amount" style="margin-left: 10px;">Amount: Rs</label>
+        <input type="number" id="amount" >
+        
+        <button onclick="addExpense()" style="margin-left: 10px;">Add Expense</button>
+    </div><hr>
+
+    <table id="expenseTable" border="1">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th>Expense Name</th>
+                <th>Amount</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody
+    </table>
+
+    <script>
+        function addExpense() {
+            let name = document.getElementById("name").value;
+            let amount = document.getElementById("amount").value;
+
+            if (name === "" || amount === "") {
+                alert("Please enter both the name and the amount!");
+                return;
+            }
+            let table = document.getElementById("expenseTable").getElementsByTagName('tbody')[0];
+            let newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td>${name}</td>
+                <td>Rs ${parseFloat(amount).toFixed(2)}</td>
+                <td><button onclick="deleteExpense(this)">Delete</button></td>
+            `;
+            document.getElementById("name").value = "";
+            document.getElementById("amount").value = "";
+        }
+
+        function deleteExpense(button) {
+            let row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</body>
+</html>
